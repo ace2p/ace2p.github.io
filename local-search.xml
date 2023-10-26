@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>second</title>
+    <link href="/2023/10/26/second/"/>
+    <url>/2023/10/26/second/</url>
+    
+    <content type="html"><![CDATA[<h3 id="在Linux下操作"><a href="#在Linux下操作" class="headerlink" title="在Linux下操作"></a>在Linux下操作</h3><blockquote><p>从Windows传输文件到Linux</p></blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp admin@172.16.10.23:/e:/video/test.mkv  ./scpTest/<br></code></pre></td></tr></table></figure><blockquote><p>从Linux下传输文件到Windows</p></blockquote><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp /root/test.mkv  admin@172.16.10.23:/E:/video/<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>testArticle</title>
     <link href="/2023/10/26/testArticle/"/>
     <url>/2023/10/26/testArticle/</url>
