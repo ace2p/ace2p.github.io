@@ -16,16 +16,17 @@
   <meta name="author" content="Mr.Zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Untracked：不在Git里。 Unstaged：在Git里但没有commit。 Staged：在Git里且已commit。    s上">
+    <meta name="description" content="Untracked：不在Git里。 Unstaged：在Git里但没有commit。 Staged：在Git里且已commit。    如何获取Git仓库？ 将尚未进行版本控制的本地目录转换为 Git 仓库；  从其它服务器 克隆 一个已存在的 Git 仓库。  在已存在目录中初始化仓库首先，你要进入你要初始化仓库的文件夹中，然后执行： 1git init  该命令将创建一个名为 .git 的子">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于">
 <meta property="og:url" content="http://example.com/2023/10/28/git/index.html">
 <meta property="og:site_name" content="Mr.Zhang Blog">
-<meta property="og:description" content="Untracked：不在Git里。 Unstaged：在Git里但没有commit。 Staged：在Git里且已commit。    s上">
+<meta property="og:description" content="Untracked：不在Git里。 Unstaged：在Git里但没有commit。 Staged：在Git里且已commit。    如何获取Git仓库？ 将尚未进行版本控制的本地目录转换为 Git 仓库；  从其它服务器 克隆 一个已存在的 Git 仓库。  在已存在目录中初始化仓库首先，你要进入你要初始化仓库的文件夹中，然后执行： 1git init  该命令将创建一个名为 .git 的子">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/10/28/git/git.png">
+<meta property="og:image" content="http://example.com/2023/10/28/git/%E5%91%A8%E6%9C%9F%E5%8F%98%E5%8C%96.png">
 <meta property="article:published_time" content="2023-10-28T06:24:57.000Z">
-<meta property="article:modified_time" content="2023-10-28T06:41:25.987Z">
+<meta property="article:modified_time" content="2023-10-29T02:39:15.615Z">
 <meta property="article:author" content="Mr.Zhang">
 <meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary_large_image">
@@ -251,7 +252,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          64 字
+          6.8k 字
         
       </span>
     
@@ -262,7 +263,7 @@
         
         
         
-          1 分钟
+          57 分钟
         
       </span>
     
@@ -351,9 +352,149 @@
 <li><strong>Unstaged</strong>：在Git里但没有commit。</li>
 <li><strong>Staged</strong>：在Git里且已commit。</li>
 </ul>
-<img src="/2023/10/28/git/git.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2023/10/28/git/git.png" srcset="/img/loading.gif" lazyload class="" title="git">
 
-<p>s上</p>
+<h3 id="如何获取Git仓库？"><a href="#如何获取Git仓库？" class="headerlink" title="如何获取Git仓库？"></a>如何获取Git仓库？</h3><ol>
+<li>将尚未进行版本控制的本地目录转换为 Git 仓库； </li>
+<li>从其它服务器 <strong>克隆</strong> 一个已存在的 Git 仓库。</li>
+</ol>
+<h4 id="在已存在目录中初始化仓库"><a href="#在已存在目录中初始化仓库" class="headerlink" title="在已存在目录中初始化仓库"></a>在已存在目录中初始化仓库</h4><p>首先，你要进入你要初始化仓库的文件夹中，然后执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git init<br></code></pre></td></tr></table></figure>
+
+<p>该命令将创建一个名为 .git 的子目录，这个子目录含有你初始化的 Git 仓库中所有的必须文件，这些文件是Git 仓库的骨干。</p>
+<h4 id="克隆现有的仓库"><a href="#克隆现有的仓库" class="headerlink" title="克隆现有的仓库"></a>克隆现有的仓库</h4><p>克隆仓库的命令是：git clone <url>，例如：要克隆Git的链接库my-repo；</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git clone https://github.com/my-repo/my-repo<br></code></pre></td></tr></table></figure>
+
+<p>这会在当前目录下创建一个名为 “libgit2” 的目录，并在这个目录下初始化一个 .git 文件夹， 从远程仓库拉取下所有数据放入 .git 文件夹，然后从中读取最新版本的文件的拷贝。 </p>
+<p>如果你想要自定义仓库的名字，你可以</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/my-repo/my-repo localrepo<br></code></pre></td></tr></table></figure>
+
+<h3 id="记录每次更新到仓库"><a href="#记录每次更新到仓库" class="headerlink" title="记录每次更新到仓库"></a>记录每次更新到仓库</h3><p>工作目录下的每一个文件都不外乎这两种状态：<strong>已跟踪</strong> 或 <strong>未跟踪</strong>。 </p>
+<img src="/2023/10/28/git/%E5%91%A8%E6%9C%9F%E5%8F%98%E5%8C%96.png" srcset="/img/loading.gif" lazyload class="" title="git文件状态">
+
+<h4 id="检查当前文件状态"><a href="#检查当前文件状态" class="headerlink" title="检查当前文件状态"></a>检查当前文件状态</h4><p>可以用<strong>git status</strong>查看当前文件状态：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git status</span><br>On branch master<br>Your branch is up-to-date with &#x27;origin/master&#x27;.nothing to commit, working directory clean<br></code></pre></td></tr></table></figure>
+
+<p>此时，当前目录下还未有未被跟踪的文件，我们增加一个README文件再试一次；</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;My Project&#x27;</span> &gt; README</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">git status</span><br>On branch master<br>Your branch is up-to-date with &#x27;origin/master&#x27;.<br>Untracked files:<br>  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)<br>    README<br>nothing added to commit but untracked files present (use &quot;git add&quot; to track)<br></code></pre></td></tr></table></figure>
+
+<p>在状态报告中可以看到新建的 README文件出现在 <strong>Untracked files</strong>下面。 未跟踪的文件意味着 Git 在之前的快照（提交）中没有这些文件，Git 不会自动将之纳入跟踪范围。那么如何跟踪新文件呢？</p>
+<h4 id="跟踪新文件"><a href="#跟踪新文件" class="headerlink" title="跟踪新文件"></a>跟踪新文件</h4><p>我们可以用<strong>git add</strong>命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git add &lt;filename&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>我们试一下把README文件跟踪一下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git add README</span><br></code></pre></td></tr></table></figure>
+
+<p>然后再查看一下状态：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git status</span><br>On branch master<br>Your branch is up-to-date with &#x27;origin/master&#x27;.<br>Changes to be committed:<br>  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)    <br>  <br>  	new file:   README<br></code></pre></td></tr></table></figure>
+
+<p>只要在 Changes to be committed这行下面的，就说明是已暂存状态。 如果此时提交，那么该文件在你运行git add时的版本将被留存在后续的历史记录中。git add命令使用<strong>文件或目录的路径</strong>作为参数；如果<strong>参数是目录的路径</strong>，该命令将<strong>递归地跟踪该目录下的所有文件</strong>。</p>
+<h4 id="暂存已修改的文件"><a href="#暂存已修改的文件" class="headerlink" title="暂存已修改的文件"></a>暂存已修改的文件</h4><p>如果你修改了一个名为 CONTRIBUTING.md的已被跟踪的文件，然后运行 git status命令，会看到下面内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git status</span><br>On branch master<br>Your branch is up-to-date with &#x27;origin/master&#x27;.Changes to be committed:<br>  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)<br>  new file:   README<br>Changes not staged for commit:<br>  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)<br>  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)<br>  modified:   CONTRIBUTING.md<br></code></pre></td></tr></table></figure>
+
+<p>​		文件 CONTRIBUTING.md出现在 Changes not staged for commit这行下面，说明已跟踪文件的内容发生了变化，但还没有放到暂存区。要暂存这次更新，需要运行 git add命令。这是个多功能命令：可以用它开始跟踪新文件，或者把已跟踪的文件放到暂存区，还能用于合并时把有冲突的文件标记为已解决状态等。我们可以将其理解为“精确地将内容添加到下一次提交中”而不是“将一个文件添加到项目中”要更加合适。现在让我们运行 git add将“CONTRIBUTING.md”放到暂存区，然后再看看 git status的输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git add CONTRIBUTING.md</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">git status</span><br>On branch master<br>Your branch is up-to-date with &#x27;origin/master&#x27;.Changes to be committed:<br>  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)<br>  <br>  new file:   README<br>  modified:   CONTRIBUTING.md<br></code></pre></td></tr></table></figure>
+
+<p>此时两个文件都已暂存，如果此时你又在CONTRIBUTING.md中加了一条注释，此时你可以猜猜看该文件的状态：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">vim CONTRIBUTING.md</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">git status</span><br>On branch master<br>Your branch is up-to-date with &#x27;origin/master&#x27;.Changes to be committed:<br>  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)<br>  <br>  new file:   README<br>  modified:   CONTRIBUTING.md<br>  <br>Changes not staged for commit:<br>  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)<br>  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)<br>  <br>  modified:   CONTRIBUTING.md<br></code></pre></td></tr></table></figure>
+
+<p>这时你会惊奇的发现，CONTRIBUTING.md竟然同时存在于暂存区和非暂存区，这是怎么回事呢？实际上 Git 只不过暂存了你运行 git add命令时的版本。如果你现在提交，CONTRIBUTING.md的版本是你最后一次运行 git add命令时的那个版本，而不是你运行 git commit时，在工作目录中的当前版本。所以，运行了git add之后又作了修订的文件，需要重新运行 git add把最新版本重新暂存起来：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git add CONTRIBUTING.md</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">git status</span><br>On branch master<br>Your branch is up-to-date with &#x27;origin/master&#x27;.Changes to be committed:<br>  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)<br>  <br>  new file:   README<br>  modified:   CONTRIBUTING.md<br></code></pre></td></tr></table></figure>
+
+<h4 id="状态简览"><a href="#状态简览" class="headerlink" title="状态简览"></a>状态简览</h4><p><strong>git status</strong>命令的输出十分详细，我们可以用<strong>git status -s</strong>或者是<strong>git status –short</strong>来简化输出，效果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git status -s</span><br> M README<br>MM Rakefile<br>A  lib/git.rb<br>M  lib/simplegit.rb <br>?? LICENSE.txt<br></code></pre></td></tr></table></figure>
+
+<p>其中前面的两列分别代表暂存区和工作区（未暂存）的状态，??代表新添加未跟踪的，新添加到暂存区的有”A”标记，”M”标记代表修改过；MM表示暂存后又做了修改，所以该文件的修改中既有暂存部分，又有非暂存部分；</p>
+<h4 id="忽略文件"><a href="#忽略文件" class="headerlink" title="忽略文件"></a>忽略文件</h4><ul>
+<li>所有空行或者以 #开头的行都会被 Git 忽略。</li>
+<li>可以使用标准的 glob 模式匹配，它会递归地应用在整个工作区中。</li>
+<li>匹配模式可以以（&#x2F;）开头防止递归。</li>
+<li>匹配模式可以以（&#x2F;）结尾指定目录。</li>
+<li>要忽略指定模式以外的文件或目录，可以在模式前加上叹号（!）取反。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">忽略所有的 .a 文件</span><br>*.a<br><span class="hljs-meta prompt_"># </span><span class="language-bash">但跟踪所有的 lib.a，即便你在前面忽略了 .a 文件</span><br>!lib.a<br><span class="hljs-meta prompt_"># </span><span class="language-bash">只忽略当前目录下的 TODO 文件，而不忽略 subdir/TODO</span><br>/TODO<br><span class="hljs-meta prompt_"># </span><span class="language-bash">忽略任何目录下名为 build 的文件夹</span><br>build/<br><span class="hljs-meta prompt_"># </span><span class="language-bash">忽略 doc/notes.txt，但不忽略 doc/server/arch.txt doc/*.txt</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">忽略 doc/ 目录及其所有子目录下的 .pdf 文件</span><br>doc/**/*.pdf<br></code></pre></td></tr></table></figure>
+
+<h4 id="查看已暂存和未暂存的修改"><a href="#查看已暂存和未暂存的修改" class="headerlink" title="查看已暂存和未暂存的修改"></a>查看已暂存和未暂存的修改</h4><p>要查看尚未暂存的文件更新了哪些部分，我们可以直接输入<strong>git diff</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git diff</span><br>diff --git a/CONTRIBUTING.md b/CONTRIBUTING.md<br>index 8ebb991..643e24f 100644<br>--- a/CONTRIBUTING.md<br>+++ b/CONTRIBUTING.md<br>@@ -65,7 +65,8 @@ branch directly, things can get messy.<br> Please include a nice description of your changes when you submit your<br>PR;<br> if we have to read the whole diff to figure out why you&#x27;re contributing  in the first place, you&#x27;re less likely to get feedback and have your<br>change<br>-merged in.<br>+merged in. Also, split your changes into comprehensive chunks if your<br>patch is<br>+longer than a dozen lines.<br></code></pre></td></tr></table></figure>
+
+<p>此命令比较的是工作目录中当前文件和暂存区域快照之间的差异。也就是修改之后还没有暂存起来的变化内容。若要查看已暂存的将要添加到下次提交里的内容，可以用<strong>git diff –staged</strong>命令。这条命令将比对已暂存文件与最后一次提交的文件差异：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git diff --staged</span><br>diff --git a/README b/README new file mode 100644<br>index 0000000..03902a1<br>--- /dev/null<br>+++ b/README<br>@@ -0,0 +1 @@<br>+My Project<br></code></pre></td></tr></table></figure>
+
+<p><em><strong>请注意，git diff 本身只显示尚未暂存的改动，而不是自上次提交以来所做的所有改动。</strong></em></p>
+<p>暂存之后再修改，可以用<strong>git diff –cached</strong>查看已经暂存起来的变化（ –staged和 –cached是同义词）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git diff --cached</span><br>diff --git a/CONTRIBUTING.md b/CONTRIBUTING.md<br>index 8ebb991..643e24f 100644<br>--- a/CONTRIBUTING.md<br>+++ b/CONTRIBUTING.md<br>@@ -65,7 +65,8 @@ branch directly, things can get messy.<br> Please include a nice description of your changes when you submit your<br>PR;<br> if we have to read the whole diff to figure out why you&#x27;re contributing  in the first place, you&#x27;re less likely to get feedback and have your<br>change<br>-merged in.<br>+merged in. Also, split your changes into comprehensive chunks if your<br>patch is<br>+longer than a dozen lines.<br></code></pre></td></tr></table></figure>
+
+<h4 id="提交更新"><a href="#提交更新" class="headerlink" title="提交更新"></a>提交更新</h4><p>命令<strong>git commit</strong>，另外，你也可以在 commit命令后添加 -m选项，将提交信息与命令放在同一行，如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git commit -m <span class="hljs-string">&quot;Story 182: Fix benchmarks for speed&quot;</span>[master 463dc4f] Story 182: Fix benchmarks <span class="hljs-keyword">for</span> speed</span><br> 2 files changed, 2 insertions(+)<br> create mode 100644 README<br></code></pre></td></tr></table></figure>
+
+<p> 可以看到，提交后它会告诉你，当前是在哪个分支（master）提交的，本次提交的完整 SHA-1 校验和是什么（463dc4f），以及在本次提交中，有多少文件修订过，多少行添加和删改过。</p>
+<h4 id="跳过使用暂存区域"><a href="#跳过使用暂存区域" class="headerlink" title="跳过使用暂存区域"></a>跳过使用暂存区域</h4><p>在提交的时候，给 git commit加上 -a选项，Git 就会自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过 git add步骤：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git commit -a -m <span class="hljs-string">&#x27;added new benchmarks&#x27;</span></span><br>[master 83e38c7] added new benchmarks<br> 1 file changed, 5 insertions(+), 0 deletions(-)<br></code></pre></td></tr></table></figure>
+
+<p><em><strong>PS：有时这个选项会将不需要的文件添加到提交中。</strong></em></p>
+<h4 id="移除文件"><a href="#移除文件" class="headerlink" title="移除文件"></a>移除文件</h4><p>要从 Git 中移除某个文件，就必须要从已跟踪文件清单中移除（确切地说，是从暂存区域移除），然后提交。可以用 git rm命令完成此项工作，并连带从工作目录中删除指定的文件，这样就不会出现在未跟踪文件清单中了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">rm</span> PROJECTS.md</span><br>rm &#x27;PROJECTS.md&#x27;<br><span class="hljs-meta prompt_">$ </span><span class="language-bash">git status</span><br>On branch master<br>Your branch is up-to-date with &#x27;origin/master&#x27;.Changes to be committed:<br>  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)<br>    deleted:    PROJECTS.md<br></code></pre></td></tr></table></figure>
+
+<p> 如果要删除之前修改过或已经放到暂存区的文件，则必须使用强制删除选项 -f（译注：即force的首字母）。这是一种安全特性，用于防止误删尚未添加到快照的数据，这样的数据不能被 Git 恢复。</p>
+<p>如果你想让文件保留在磁盘，但是并不想让 Git 继续跟踪，那么可以用下面的方式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">rm</span> --cached README</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="移动文件"><a href="#移动文件" class="headerlink" title="移动文件"></a>移动文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">mv</span> file_from file_to</span><br></code></pre></td></tr></table></figure>
+
+<p>其实，运行 git mv就相当于运行了下面三条命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">mv</span> README.md README</span> <br><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">rm</span> README.md</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">git add README</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h4><p><strong>git log</strong></p>
+<p>其中一个比较有用的选项是 <strong>-p或 –patch</strong>，它会显示每次提交所引入的差异（按 <strong>补丁</strong>的格式输出）。 你也可以限制显示的日志条目数量，例如使用 -2选项来只显示最近的两次提交；</p>
+<p><strong>–stat</strong>选项在每次提交的下面列出所有被修改过的文件、有多少文件被修改了以及被修改过的文件的哪些行被移除或是添加了。</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-p</td>
+<td>按补丁格式显示每个提交引入的差异</td>
+</tr>
+<tr>
+<td>–stat</td>
+<td>显示每次提交的文件修改统计信息</td>
+</tr>
+<tr>
+<td>–shortstat</td>
+<td>只显示 –stat 中最后的行数修改添加移除统计</td>
+</tr>
+<tr>
+<td>–name–only</td>
+<td>仅在提交信息后显示已修改的文件清单</td>
+</tr>
+<tr>
+<td>–name–status</td>
+<td>显示新增、修改、删除的文件清单</td>
+</tr>
+<tr>
+<td>–abbrev–commit</td>
+<td>仅显示 SHA-1 校验和所有 40 个字符中的前几个字符</td>
+</tr>
+<tr>
+<td>–relative–date</td>
+<td>使用较短的相对时间而不是完整格式显示日期</td>
+</tr>
+<tr>
+<td>–graph</td>
+<td>在日志旁以 ASCII 图形显示分支与合并历史</td>
+</tr>
+<tr>
+<td>–pretty</td>
+<td>用其他格式显示历史提交信息，如<strong>oneline</strong>&#x2F;<strong>short</strong>&#x2F;<strong>full</strong>&#x2F;<strong>fuller</strong>和<strong>format</strong>(自定义格式)</td>
+</tr>
+<tr>
+<td>–oneline</td>
+<td>format–pretty&#x3D;oneline –abbrev-commit合用的简写</td>
+</tr>
+</tbody></table>
 
   </div>
 
