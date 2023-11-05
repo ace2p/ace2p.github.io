@@ -16,17 +16,20 @@
   <meta name="author" content="Mr.Zhang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome!">
+    <meta name="description" content="Git分支Git 的分支本质上仅仅是指向提交对象的可变指针。Git 的默认分支名字是master。在多次提交操作之后，你其实已经有一个指向最后那个提交对象的 master 分支。master 分支会在每次提交时自动向前移动。 Git 的 master 分支并不是一个特殊分支。它就跟其它分支完全没有区别。之所以几乎每一个仓库都有 master 分支，是因为 git init 命令默认创建它，并且大多">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git-merge">
 <meta property="og:url" content="http://example.com/2023/11/01/git-merge/index.html">
 <meta property="og:site_name" content="Mr.Zhang Blog">
-<meta property="og:description" content="Welcome!">
+<meta property="og:description" content="Git分支Git 的分支本质上仅仅是指向提交对象的可变指针。Git 的默认分支名字是master。在多次提交操作之后，你其实已经有一个指向最后那个提交对象的 master 分支。master 分支会在每次提交时自动向前移动。 Git 的 master 分支并不是一个特殊分支。它就跟其它分支完全没有区别。之所以几乎每一个仓库都有 master 分支，是因为 git init 命令默认创建它，并且大多">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/11/01/git-merge/%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2.png">
 <meta property="article:published_time" content="2023-11-01T14:24:01.000Z">
-<meta property="article:modified_time" content="2023-11-01T14:24:02.002Z">
+<meta property="article:modified_time" content="2023-11-05T03:39:02.189Z">
 <meta property="article:author" content="Mr.Zhang">
+<meta property="article:tag" content="git merge">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/11/01/git-merge/%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2.png">
   
   
   
@@ -248,7 +251,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.1k 字
         
       </span>
     
@@ -259,7 +262,7 @@
         
         
         
-          1 分钟
+          10 分钟
         
       </span>
     
@@ -309,7 +312,27 @@
             
               <div class="markdown-body">
                 
-                
+                <h2 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h2><p>Git 的分支本质上仅仅是指向提交对象的可变指针。Git 的默认分支名字是master。在多次提交操作之后，你其实已经有一个指向最后那个提交对象的 master 分支。master 分支会在每次提交时自动向前移动。</p>
+<p>Git 的 master 分支并不是一个特殊分支。它就跟其它分支完全没有区别。之所以几乎每一个仓库都有 master 分支，是因为 git init 命令默认创建它，并且大多数人都懒得去改动它。</p>
+<img src="/2023/11/01/git-merge/%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2.png" srcset="/img/loading.gif" lazyload class="" title="commit-history">
+
+<h3 id="分支创建"><a href="#分支创建" class="headerlink" title="分支创建"></a>分支创建</h3><p>Git 是怎么创建新分支的呢？ 很简单，它只是为你创建了一个可以移动的新的指针。 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git branch &lt;merge-name&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>这会在当前所在的提交对象上创建一个指针，那么，Git 又是怎么知道当前在哪一个分支上呢？也很简单，它有一个名为 HEAD 的特殊指针。</p>
+<p>你可以简单地使用 git log 命令查看各个分支当前所指的对象。 提供这一功能的参数是 –decorate。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --oneline --decorate</span><br>f30ab (HEAD -&gt; master, testing) add feature #32 - ability to add new<br>formats to the central interface<br>34ac2 Fixed bug #1328 - stack overflow under certain conditions<br>98ca9 The initial commit of my project<br></code></pre></td></tr></table></figure>
+
+<h3 id="分支切换"><a href="#分支切换" class="headerlink" title="分支切换"></a>分支切换</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git checkout master</span><br></code></pre></td></tr></table></figure>
+
+<p>这条命令做了两件事。一是使 HEAD 指回 master 分支，二是将工作目录恢复成 master 分支所指向的快照内容。也就是说，你现在做修改的话，项目将始于一个较旧的版本。本质上来讲，这就是忽略新建 testing 分支所做的修改，以便于向另一个方向进行开发。</p>
+<p>你可以简单地使用 git log 命令查看分叉历史。 运行 git log –oneline –decorate –graph –all ，它会输出你的提交历史、各个分支的指向以及项目的分支分叉情况。 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">log</span> --oneline --decorate --graph --all</span><br>* c2b9e (HEAD, master) made other changes<br>| * 87ab2 (testing) made a change<br>|/<br>* f30ab add feature #32 - ability to add new formats to the<br>* 34ac2 fixed bug #1328 - stack overflow under certain conditions<br>* 98ca9 initial commit of my project<br></code></pre></td></tr></table></figure>
+
+<p>通常我们会在创建一个新分支后立即切换过去，这可以用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git checkout -b &lt;newbranchname&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="分支的新建与合并"><a href="#分支的新建与合并" class="headerlink" title="分支的新建与合并"></a>分支的新建与合并</h3>
                 
               </div>
             
@@ -317,6 +340,13 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/git-merge/" class="print-no-link">#git merge</a>
+      
+    </div>
   
 </div>
 
