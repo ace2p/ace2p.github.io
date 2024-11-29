@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>git-merge | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Git分支Git 的分支本质上仅仅是指向提交对象的可变指针。Git 的默认分支名字是master。在多次提交操作之后，你其实已经有一个指向最后那个提交对象的 master 分支。master 分支会在每次提交时自动向前移动。 Git 的 master 分支并不是一个特殊分支。它就跟其它分支完全没有区别。之所以几乎每一个仓库都有 master 分支，是因为 git init 命令默认创建它，并且大多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git-merge">
+<meta property="og:url" content="http://example.com/2023/11/01/git-merge/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Git分支Git 的分支本质上仅仅是指向提交对象的可变指针。Git 的默认分支名字是master。在多次提交操作之后，你其实已经有一个指向最后那个提交对象的 master 分支。master 分支会在每次提交时自动向前移动。 Git 的 master 分支并不是一个特殊分支。它就跟其它分支完全没有区别。之所以几乎每一个仓库都有 master 分支，是因为 git init 命令默认创建它，并且大多">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-01T14:24:01.000Z">
+<meta property="article:modified_time" content="2023-11-19T07:43:06.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="git merge">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-git-merge" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/11/01/git-merge/" class="article-date">
+  <time class="dt-published" datetime="2023-11-01T14:24:01.000Z" itemprop="datePublished">2023-11-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      git-merge
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h2><p>Git 的分支本质上仅仅是指向提交对象的可变指针。Git 的默认分支名字是master。在多次提交操作之后，你其实已经有一个指向最后那个提交对象的 master 分支。master 分支会在每次提交时自动向前移动。</p>
+<p>Git 的 master 分支并不是一个特殊分支。它就跟其它分支完全没有区别。之所以几乎每一个仓库都有 master 分支，是因为 git init 命令默认创建它，并且大多数人都懒得去改动它。</p>
+
+
+<h3 id="分支创建"><a href="#分支创建" class="headerlink" title="分支创建"></a>分支创建</h3><p>Git 是怎么创建新分支的呢？ 很简单，它只是为你创建了一个可以移动的新的指针。 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git branch &lt;merge-name&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这会在当前所在的提交对象上创建一个指针，那么，Git 又是怎么知道当前在哪一个分支上呢？也很简单，它有一个名为 HEAD 的特殊指针。</p>
+<p>你可以简单地使用 git log 命令查看各个分支当前所指的对象。 提供这一功能的参数是 –decorate。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">log</span> --oneline --decorate</span></span><br><span class="line">f30ab (HEAD -&gt; master, testing) add feature #32 - ability to add new</span><br><span class="line">formats to the central interface</span><br><span class="line">34ac2 Fixed bug #1328 - stack overflow under certain conditions</span><br><span class="line">98ca9 The initial commit of my project</span><br></pre></td></tr></table></figure>
+
+<h3 id="分支切换"><a href="#分支切换" class="headerlink" title="分支切换"></a>分支切换</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git checkout master</span></span><br></pre></td></tr></table></figure>
+
+<p>这条命令做了两件事。一是使 HEAD 指回 master 分支，二是将工作目录恢复成 master 分支所指向的快照内容。也就是说，你现在做修改的话，项目将始于一个较旧的版本。本质上来讲，这就是忽略新建 testing 分支所做的修改，以便于向另一个方向进行开发。</p>
+<p>你可以简单地使用 git log 命令查看分叉历史。 运行 git log –oneline –decorate –graph –all ，它会输出你的提交历史、各个分支的指向以及项目的分支分叉情况。 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">log</span> --oneline --decorate --graph --all</span></span><br><span class="line">* c2b9e (HEAD, master) made other changes</span><br><span class="line">| * 87ab2 (testing) made a change</span><br><span class="line">|/</span><br><span class="line">* f30ab add feature #32 - ability to add new formats to the</span><br><span class="line">* 34ac2 fixed bug #1328 - stack overflow under certain conditions</span><br><span class="line">* 98ca9 initial commit of my project</span><br></pre></td></tr></table></figure>
+
+<p>通常我们会在创建一个新分支后立即切换过去，这可以用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git checkout -b &lt;newbranchname&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="分支的新建与合并"><a href="#分支的新建与合并" class="headerlink" title="分支的新建与合并"></a>分支的新建与合并</h3><h4 id="新建分支"><a href="#新建分支" class="headerlink" title="新建分支"></a>新建分支</h4><p>首先，我们假设你正在你的项目上工作，并且在 master 分支上已经有了一些提交。</p>
+
+
+<p>追踪系统中的#issue53问题，首先新建一个分支并同时切换到那个分支上，你可以运行一个带有-b参数的git checkout命令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git checkout -b iss53</span></span><br><span class="line">Switched to a new branch &quot;iss53&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>你继续在#53问题上工作，并且做了一些提交。在此过程中，iss53分支在不断的向前推进，因为你已经检出到该分支（即你的HEAD指针指向了iss53分支）</p>
+
+
+<p>现在你接到那个电话，有个紧急问题等待你来解决。有了Git的帮助，你不必把这个紧急问题和iss53的修改混在一起，你也不需要花大力气来还原关于53#问题的修改，然后再添加关于这个紧急问题的修改，最后将这个修改提交到线上分支。你所要做的仅仅是切换回master分支。但是，在你这么做之前，要留意你的工作目录和暂存区里那些还没有被提交的修改，它可能会和你即将检出的分支产生冲突从而阻止 Git 切换到该分支。 最好的方法是，在你切换分支之前，保持好一个干净的状态。有一些方法可以绕过这个问题（即，暂存（stashing）和修补提交（commit amending）），我们会在贮藏与清理中看到关于这两个命令的介绍。 现在，我们假设你已经把你的修改全部提交了，这时你可以切换回 master 分支了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git checkout master</span></span><br><span class="line">Switched to branch &#x27;master&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>当你切换分支的时候，Git 会重置你的工作目录，使其看起来像回到了你在那个分支上最后一次提交的样子。Git会自动添加、删除、修改文件以确保此时你的工作目录和这个分支最后一次提交时的样子一模一样。接下来，你要修复这个紧急问题。我们来建立一个 hotfix 分支，在该分支上工作直到问题解决：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git checkout -b hotfix</span></span><br><span class="line">Switched to a new branch &#x27;hotfix&#x27;</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim index.html</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git commit -a -m <span class="string">&#x27;fixed the broken email address&#x27;</span></span></span><br><span class="line">[hotfix 1fb7853] fixed the broken email address</span><br><span class="line"> 1 file changed, 2 insertions(+)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后将 hotfix 分支合并回你的 master 分支来部署到线上：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git checkout master</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git merge hotfix</span></span><br><span class="line">Updating f42c576..3a0874c</span><br><span class="line">Fast-forward</span><br><span class="line"> index.html | 2 ++</span><br><span class="line"> 1 file changed, 2 insertions(+)</span><br></pre></td></tr></table></figure>
+
+<p>由于你想要合并的分支 hotfix 所指向的提交 C4 是你所在的提交 C2 的直接后继，因此 Git 会直接将指针向前移动。换句话说，当你试图合并两个分支时，如果顺着一个分支走下去能够到达另一个分支，那么 Git 在合并两者的时候，只会简单的将指针向前推进（指针右移），因为这种情况下的合并操作没有需要解决的分歧——这就叫做 “快进（fast-forward）”。</p>
+<p>现在，最新的修改已经在 master 分支所指向的提交快照中，你可以着手发布该修复了。</p>
+
+
+<p>关于这个紧急问题的解决方案发布之后，你准备回到被打断之前时的工作中。然而，你应该先删除 hotfix 分支，因为你已经不再需要它了——master 分支已经指向了同一个位置。你可以使用带 -d 选项的 git branch 命令来删除分支：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git branch -d hotfix</span></span><br><span class="line">Deleted branch hotfix (3a0874c).</span><br></pre></td></tr></table></figure>
+
+<p>现在你可以切换回你正在工作的分支继续你的工作，也就是针对 #53 问题的那个分支（iss53 分支）。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git checkout iss53</span></span><br><span class="line">Switched to branch &quot;iss53&quot;</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim index.html</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git commit -a -m <span class="string">&#x27;finished the new footer [issue 53]&#x27;</span></span></span><br><span class="line">[iss53 ad82d7a] finished the new footer [issue 53]</span><br><span class="line">1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>你在 hotfix 分支上所做的工作并没有包含到 iss53 分支中。如果你需要拉取 hotfix 所做的修改，你可以使用 git merge master 命令将 master 分支合并入 iss53 分支，或者你也可以等到 iss53 分支完成其使命，再将其合并回 master 分支。</p>
+<h4 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h4><p>你只需要检出到你想合并入的分支，然后运行git merge 命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git checkout master</span></span><br><span class="line">Switched to branch &#x27;master&#x27;</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git merge iss53</span></span><br><span class="line">Merge made by the &#x27;recursive&#x27; strategy.</span><br><span class="line">index.html | 1 +</span><br><span class="line">1 file changed, 1 insertion(+)</span><br></pre></td></tr></table></figure>
+
+<p>这和你之前合并 hotfix 分支的时候看起来有一点不一样。 在这种情况下，你的开发历史从一个更早的地方开始分叉开来（diverged）。 因为，master 分支所在提交并不是 iss53 分支所在提交的直接祖先，Git 不得不做一些额外的工作。 出现这种情况的时候，Git 会使用两个分支的末端所指的快照（C4 和 C5）以及这两个分支的公共祖先（C2），做一个简单的三方合并。</p>
+
+
+<p>和之前将分支指针向前推进所不同的是，Git 将此次三方合并的结果做了一个新的快照并且自动创建一个新的提交指向它。这个被称作一次合并提交，它的特别之处在于他有不止一个父提交。</p>
+
+
+<p>既然你的修改已经合并进来了，就不再需要 iss53 分支了。现在你可以在任务追踪系统中关闭此项任务，并删除这个分支。<strong>git branch -d iss53</strong></p>
+<h4 id="遇到冲突时的分支合并"><a href="#遇到冲突时的分支合并" class="headerlink" title="遇到冲突时的分支合并"></a>遇到冲突时的分支合并</h4><p>如果你在两个不同的分支中，对同一个文件的同一个部分进行了不同的修改，Git 就没法干净的合并它们。例如:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git merge iss53</span></span><br><span class="line">Auto-merging index.html</span><br><span class="line">CONFLICT (content): Merge conflict in index.html</span><br><span class="line">Automatic merge failed; fix conflicts and then commit the result.</span><br></pre></td></tr></table></figure>
+
+<p>Git 会暂停下来，等待你去解决合并产生的冲突。你可以在合并冲突后的任意时刻使用 git status 命令来查看那些因包含合并冲突而处于未合并（unmerged）状态的文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git status</span></span><br><span class="line">On branch master</span><br><span class="line">You have unmerged paths.</span><br><span class="line">  (fix conflicts and run &quot;git commit&quot;)</span><br><span class="line">Unmerged paths:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to mark resolution)</span><br><span class="line">  both modified: index.html</span><br><span class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>出现冲突的文件会包含一些特殊区段，看起来像下面这个样子:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:index.html</span><br><span class="line">&lt;div id=&quot;footer&quot;&gt;contact : email.support@github.com&lt;/div&gt;</span><br><span class="line">=======</span><br><span class="line">&lt;div id=&quot;footer&quot;&gt;</span><br><span class="line"> please contact us at support@github.com</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt;&gt;&gt;&gt;&gt; iss53:index.html</span></span><br></pre></td></tr></table></figure>
+
+<p> 例如，你可以通过把这段内容换成下面的样子来解决冲突：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;footer&quot;&gt;</span><br><span class="line">	please contact us at email.support@github.com</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上述的冲突解决方案仅保留了其中一个分支的修改，并且 &lt;&lt;&lt;&lt; , &#x3D;&#x3D;&#x3D;&#x3D; , 和 &gt;&gt;&gt;&gt; 这些行被完全删除了。在你解决了所有文件里的冲突之后，对每个文件使用 git add 命令来将其标记为冲突已解决。一旦暂存这些原本有冲突的文件，Git 就会将它们标记为冲突已解决。</p>
+<p>你可以再次运行 git status 来确认所有的合并冲突都已被解决：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git status</span></span><br><span class="line">On branch master</span><br><span class="line">All conflicts fixed but you are still merging.</span><br><span class="line">  (use &quot;git commit&quot; to conclude merge)</span><br><span class="line">Changes to be committed:</span><br><span class="line">  modified: index.html</span><br></pre></td></tr></table></figure>
+
+<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/11/01/git-merge/" data-id="cm42ljjv800006hkzce59dhpk" data-title="git-merge" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git-merge/" rel="tag">git merge</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/11/23/git-sever/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          git-sever
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/10/28/git/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">git</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Factory-Method/" rel="tag">Factory Method</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/First/" rel="tag">First</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitServer-Config/" rel="tag">GitServer-Config</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-merge/" rel="tag">git merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%88%9B/" rel="tag">原创</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8C%9C%E6%83%B3/" rel="tag">猜想</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Factory-Method/" style="font-size: 10px;">Factory Method</a> <a href="/tags/First/" style="font-size: 10px;">First</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitServer-Config/" style="font-size: 10px;">GitServer-Config</a> <a href="/tags/git-merge/" style="font-size: 10px;">git merge</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 10px;">原创</a> <a href="/tags/%E7%8C%9C%E6%83%B3/" style="font-size: 10px;">猜想</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">October 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/11/29/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/29/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/25/nginx/">nginx</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/23/git-sever/">git-sever</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/01/git-merge/">git-merge</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
